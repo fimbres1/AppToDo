@@ -81,7 +81,8 @@ form input {
 }
 .button-complete,
 .button-delete,
-.button-edit {
+.button-edit,
+.button-add-image {
   border: none;
   outline: none;
   cursor: pointer;
@@ -93,6 +94,10 @@ form input {
 }
 .button-complete {
   color: #95faa3;
+  margin-right: 10px;
+}
+.button-add-image{
+  color: cyan;
   margin-right: 10px;
 }
 .button-edit {
@@ -113,4 +118,38 @@ form input {
 input:focus,
 button:focus {
   outline: none;
+}
+
+.login-with-google-btn {
+  background-color: blue;
+  color: white;
+  flex: auto;
+  flex-direction: row;
+  border-radius: 15px;
+  float: inline-end;
+  border: none;
+  cursor: pointer;
+  gap: 18px;
+  margin: 10px;
+}
+
+.login-with-google-btn:hover{
+  transform: scale(1.1);
+}
+
+.signUserOut {
+  background-color: blue;
+  color: white;
+  flex: auto;
+  flex-direction: row;
+  border-radius: 15px;
+  float: inline-end;
+  border: none;
+  cursor: pointer;
+  gap: 18px;
+  margin: 10px;
+}
+
+.signUserOut:hover{
+  transform: scale(1.1);
 }

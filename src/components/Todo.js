@@ -2,8 +2,13 @@ import React from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-export default function Todo({ todo, toggleComplete, handleDelete, handleEdit,}) {
+import AddImage from "@mui/icons-material/Image";
+import addImage from "./addImage";
+
+export default function Todo({ todo, toggleComplete, handleDelete, handleEdit, handleImage,}) {
   const [newTitle, setNewTitle] = React.useState(todo.title);
+
+  const uploadImage = () => {};
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -29,6 +34,13 @@ export default function Todo({ todo, toggleComplete, handleDelete, handleEdit,})
           onClick={() => toggleComplete(todo)}
         >
           <CheckCircleIcon id="i" />
+        </button>
+        <button
+          className="button-add-image"
+          input type="file"
+          onClick={addImage}
+        >
+            <AddImage id="i"/>
         </button>
         <button
           className="button-edit"
