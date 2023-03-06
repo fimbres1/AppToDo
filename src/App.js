@@ -14,17 +14,19 @@ import {
 import { auth, db } from "./firebase";
 import Login from "./components/Login";
 import { signOut } from "firebase/auth";
-import addImage from "./components/addImage";
+// import AddImage from "./components/AddImage";
 
 
 
 function App() {
+
 
   const [isAuth, setIsAuth] = useState(false);
   const signUserOut = () => {
     signOut(auth).then (() => {
       localStorage.clear()
       setIsAuth(false)
+      alert("Se ha cerrado la sesión")
     })
   };
   const [todos, setTodos] = React.useState([]);
@@ -43,16 +45,18 @@ function App() {
 
   const handleEdit = async (todo, title) => {
     await updateDoc(doc(db, "todos", todo.id), { title: title });
+    alert("Tarea actualizada")
   };
   const toggleComplete = async (todo) => {
     await updateDoc(doc(db, "todos", todo.id), { completed: !todo.completed });
   };
   const handleDelete = async (id) => {
     await deleteDoc(doc(db, "todos", id));
+    alert("Tarea eliminada")
   };
-  const handleImage = async (id) => {
-
-  };
+  // const handleImage = async (id) => {
+  //   await addImage(File())
+  // };
 
 
   return (
@@ -66,7 +70,9 @@ function App() {
       <div>
         <AddTodo />
       </div>
-      <addImage />
+      {/* <div>
+        <AddImage />
+      </div> */}
       <div className="todo_container">
         {todos.map((todo) => (
           <Todo
@@ -75,7 +81,6 @@ function App() {
             toggleComplete={toggleComplete}
             handleDelete={handleDelete}
             handleEdit={handleEdit}
-            handleImage={handleImage}
           />
         ))}
       </div>

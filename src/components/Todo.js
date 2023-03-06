@@ -2,13 +2,45 @@ import React from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import AddImage from "@mui/icons-material/Image";
-import addImage from "./addImage";
+import ImageIcon from "@mui/icons-material/Image";
+import { storage } from "../firebase"
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+// import AddImage from "../components/AddImage"
 
-export default function Todo({ todo, toggleComplete, handleDelete, handleEdit, handleImage,}) {
+
+export default function Todo({ todo, toggleComplete, handleDelete, handleEdit,}) {
   const [newTitle, setNewTitle] = React.useState(todo.title);
+  const [file, setFile] = React.useState("");
+  const [percent, setPercent] = React.useState(0);
 
-  const uploadImage = () => {};
+  function handleImage(event) {
+    setFile(event.target.files[0]);
+}
+  const handleUpload = () => {
+    if (!file) {
+      alert("Please upload an image");
+    }
+  }
+
+  const storageRef = ref(storage, `/files/${file.name}`);
+
+  const uploadTask = uploadBytesResumable(storageRef, file)
+
+  uploadTask.on(
+    "state_changed",
+    (snapshot) => {
+      const percent = Math.round(
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      );
+      setPercent(percent);
+    },
+    (err) => console.log(err),
+    () => {
+      getDownloadURL(uploadTask.snapshot.ref).then((URL) => {
+        console.log(URL);
+      });
+    }
+  )
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -35,13 +67,11 @@ export default function Todo({ todo, toggleComplete, handleDelete, handleEdit, h
         >
           <CheckCircleIcon id="i" />
         </button>
-        <button
+        {/* <button
           className="button-add-image"
-          input type="file"
-          onClick={addImage}
         >
-            <AddImage id="i"/>
-        </button>
+            <ImageIcon id="i"/>
+        </button> */}
         <button
           className="button-edit"
           onClick={() => handleEdit(todo, newTitle)}

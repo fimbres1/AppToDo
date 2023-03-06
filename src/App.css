@@ -153,3 +153,31 @@ button:focus {
 .signUserOut:hover{
   transform: scale(1.1);
 }
+
+.btn-choose-file{
+  background-color: aqua;
+}
+
+.upload-to-firebase{
+  background-color: rgb(44, 176, 75);
+  color: white;
+  height: fit-content;
+  border-radius: 15px;
+  width: 250px;
+  margin: 5px;
+}
+
+.select-image{
+  background-color: darkcyan;
+  height:fit-content;
+  width: 250px;
+  margin: 5px;
+}
+
+.add-image-group{
+  flex:content;
+  flex-direction: column;
+  float:right;
+  position: relative;
+  margin: 10px;
+}

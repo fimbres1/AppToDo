@@ -14,8 +14,13 @@ var uid = ''
         signInWithPopup(auth, provider).then((result) => {
             localStorage.setItem("isAuth", true);
             setIsAuth(true);
-
         })
+
+        onAuthStateChanged(auth, (user) => {
+            if(user) {
+             alert("Bienvenido " + user.displayName)
+            } 
+         });
 
 
     };

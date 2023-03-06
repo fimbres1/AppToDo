@@ -12,11 +12,21 @@ export default function AddTodo() {
     } else {
       uid2=null;
     }
-    console.log(uid2)
+
  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    onAuthStateChanged(auth, (user) => {
+      if(!user){
+        alert("Inicia sesión para agregar una nueva tarea")
+      } else
+      {
+        console.log("")
+      }
+    });
+
     if (title !== "") {
       await addDoc(collection(db, "todos"), {
         title,
@@ -31,13 +41,13 @@ export default function AddTodo() {
       <div className="input_container">
         <input
           type="text"
-          placeholder="Enter todo..."
+          placeholder="Ingresa una tarea"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
       </div>
       <div className="btn_container">
-        <button>Add</button>
+        <button>Agregar</button>
       </div>
     </form>
   );
