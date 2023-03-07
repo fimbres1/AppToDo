@@ -8,7 +8,6 @@ import { addDoc, collection } from "firebase/firestore";
 
 function Login({setIsAuth}){
 
-var uid = ''
 
     const signInWithGoogle = () => {
         signInWithPopup(auth, provider).then((result) => {
@@ -19,13 +18,15 @@ var uid = ''
         onAuthStateChanged(auth, (user) => {
             if(user) {
              alert("Bienvenido " + user.displayName)
-            } 
+            } else
+            {
+                user = null
+            }
          });
 
 
     };
 
-console.log(uid)
 
     return <div className="loginPage">
         <button className="login-with-google-btn" onClick={signInWithGoogle}>
